@@ -13,6 +13,6 @@ export class AppComponent {
   telegram = inject(TelegramService);
 
   constructor() {
-    this.telegram.MainButton.show();
+    this.telegram.ready();
   }
 }

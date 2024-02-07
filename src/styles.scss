@@ -1,22 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
-@import url("https://fonts.googleapis.com/css2?family=Inter&family=Titillium+Web&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Inter&family=Titillium+Web&display=swap");
 
 :root {
   --main-padding: 16px;
+  --bg-color: #FAD48B;
+  --text-color: #981E4F;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
 }
 
 body {
   font-size: 14px;
   padding: var(--main-padding);
   font-family: "Inter", sans-serif;
-  background: var(--tg-theme-bg-color);
-  color: var(--tg-theme-text-color);
+//   background: var(--tg-theme-bg-color);
+  background-color: var(--bg-color);
+//   color: var(--tg-theme-text-color);
+  color: var(--text-color);
 }
 
 a {
@@ -59,32 +64,203 @@ hr {
   border-radius: 10px;
 }
 
-.products {
+.books {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.product-item {
+.book-item {
   overflow: hidden;
-  box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
+//   box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.25);
+background-color: #FFFFFF;
+  border-radius: 20px;
   margin-bottom: var(--main-padding);
   cursor: pointer;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+
+  &::after {
+    content: '';
+    border-radius: 50%;
+    background-color: var(--bg-color);
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    top: 44%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    z-index: 1;
+  }
 }
 
-.product-image {
+.book-image {
   display: flex;
   justify-content: center;
-  background: var(--tg-theme-secondary-bg-color);
+//   background: var(--tg-theme-secondary-bg-color);
   text-align: center;
+  position: relative;
+  z-index: 2;
 }
 
-.product-image img {
+.book-image img {
   display: block;
   padding: 10px;
+  width: auto;
+//   max-width: 200px;
+  max-height: 300px;
 }
 
-.product-info {
+.book-info {
   padding: var(--main-padding);
+  h3 {
+    font-weight: bold;
+  }
+  position: relative;
+  z-index: 2;
+}
+
+app-book-list {
+    h2 {
+        margin-bottom: 20px;
+        margin-top: 40px;
+    }
+}
+
+.book-item-inner {
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    padding: 20px;
+    img {
+        max-width: 200px;
+    }
+
+    .book-text {
+        max-width: 400px;
+        margin: 0 auto;
+        text-align: center;
+        display: flex;
+        margin-top: 20px;
+    }
+}
+
+.btn {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    a {
+        text-decoration: none;
+        color: var(--text-color);
+        font-weight: bold;
+    }
+}
+
+.filter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    &-item {
+        font-size: 16px;
+        text-align: center;
+        padding: 10px 20px;
+        border-radius: 20px;
+        font-weight: bold;
+        background-color: #FFFFFF;
+        color: var(--text-color);
+        cursor: pointer;
+
+        &.active {
+            background-color: var(--text-color);
+            color:#FFFFFF;
+        }
+    }
+}
+
+.title {
+    text-align: center;
+    margin: 20px 0 30px 0;
+}
+
+.list {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  // flex-direction: column;
+  gap: 10px;
+  text-align: left;
+  justify-content: center;
+
+  li {
+    border: 1px solid var(--text-color);
+    border-radius: 20px;
+    padding: 5px 10px;
+    width: max-content;
+  }
+}
+
+.btn-back {
+  border: 2px solid var(--text-color);
+  padding: 5px 10px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: transparent;
+  color: var(--text-color);
+}
+.loader-wrapper {
+  position: absolute;
+  background-color: #fad38b7a;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loader {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  position: relative;
+  animation: rotate 1s linear infinite
+}
+.loader::before , .loader::after {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  inset: 0px;
+  border-radius: 50%;
+  border: 5px solid #FFF;
+  animation: prixClipFix 2s linear infinite ;
+}
+.loader::after{
+  border-color: var(--text-color);
+  animation: prixClipFix 2s linear infinite , rotate 0.5s linear infinite reverse;
+  inset: 6px;
+}
+
+@keyframes rotate {
+  0%   {transform: rotate(0deg)}
+  100%   {transform: rotate(360deg)}
+}
+
+@keyframes prixClipFix {
+    0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
+    25%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
+    50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
+    75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 100%)}
+    100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0)}
 }
