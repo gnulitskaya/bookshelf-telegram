@@ -29,6 +29,10 @@ export class TelegramService {
     return this.tg.BackButton;
   }
 
+  sendData(data: object) {
+    this.tg.sendData(JSON.stringify(data));
+  }
+
   ready() {
     this.tg.ready()
   }
